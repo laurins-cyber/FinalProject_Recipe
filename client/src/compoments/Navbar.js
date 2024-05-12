@@ -4,11 +4,11 @@ const Navbar = () => {
     return(
         <>
         <div>
-            <h1>EMPTY YOUR FRIDGE</h1>
+            <Link to="/">EMPTY YOUR FRIDGE</Link>
         </div>
 
         <div>
-            <Link to="/randomrecipes">Random Recpies</Link>
+            <Link to="/recipes">Recpies</Link>
             <Link to="/favorites">Fav</Link>
         </div>
         </>
