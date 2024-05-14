@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const SearchBar = () => {
     const [query, setQuery] = useState('');
-    const history = useHistory();
+    const navigate = useNavigate();
 
     const handleSearch = () => {
     if (query.trim() !== '') {
@@ -16,10 +16,7 @@ const SearchBar = () => {
         })
         .then(data => {
           // Redirect to the Recipes component with search results
-            history.push({
-            pathname: '/recipes',
-            state: { results: data.results },
-            });
+            navigate('/recipes', { state: { results: data.results } });
         })
         .catch(error => {
             console.error('Error searching recipes:', error);

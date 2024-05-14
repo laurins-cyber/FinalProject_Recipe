@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Recipes = ({ location }) => {
-    const { results } = location.state;
+    const { results } = location?.state || { results: [] };
 
     return (
     <div>

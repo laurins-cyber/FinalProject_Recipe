@@ -1,11 +1,13 @@
 //imports
+import SearchBar from "./SearchBar";
+import Recipes from "./Recipes";
 
 const Home = () => {
 
     return(
         <>
         <SearchBar/>
-        <RandomRecipes/>
+        <Recipes/>
 
         </>
     )

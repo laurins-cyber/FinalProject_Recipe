@@ -5,7 +5,7 @@ import Navbar from "./compoments/Navbar";
 import Home from "./compoments/Home";
 import Recipes from "./compoments/Recipes";
 import Recipe from './compoments/Recipe';
-//import FavPage
+import FavPage from "./compoments/FavPage";
 
 const App = () => {
 
