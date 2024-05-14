@@ -10,6 +10,7 @@ const Recipes = ({ location }) => {
         <ul>
         {results.map(recipe => (
             <li key={recipe.id}>
+                <img src={recipe.image} alt={recipe.title} />
             <Link to={`/recipe/${recipe.id}`}>{recipe.title}</Link>
             </li>
         ))}
