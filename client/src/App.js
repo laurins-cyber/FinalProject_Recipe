@@ -51,7 +51,7 @@ const App = () => {
         <Navbar />
         <div>
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={<Home searchRecipes={searchRecipes} />} />
                     <Route path="/recipes" element={<RecipeList recipes={recipes} onFavorite={handleFavorite} />} />
                     <Route path="/recipe/:id" element={<Recipe />} />
                     <Route path="/favorites" element={<FavPage />} />

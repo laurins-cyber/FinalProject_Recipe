@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 
 const Recipes = ({ recipes, onFavorite }) => {
     const location = useLocation();
-    const results = location?.state?.results || []; // Use passed props or location state
+    const results = recipes.length ? recipes : (location.state?.results || []); // Use passed props or location state
 
     return (
         <div>

@@ -1,28 +1,22 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const SearchBar = () => {
+const SearchBar = ({ searchRecipes }) => {
     const [query, setQuery] = useState('');
     const navigate = useNavigate();
 
     const handleSearch = () => {
-    if (query.trim() !== '') {
-        fetch(`/api/search?ingredients=${query}`)
-        .then(response => {
-            if (!response.ok) {
-            throw new Error('Failed to fetch recipes');
-            }
-            return response.json();
-        })
-        .then(data => {
-            // Redirect to the Recipes component with search results
-            navigate('/recipes', { state: { results: data } });
-        })
-        .catch(error => {
-            console.error('Error searching recipes:', error);
-        });
-}
-};
+        if (query.trim() !== '') {
+            searchRecipes(query)
+                .then(data => {
+                    // Redirect to the Recipes component with search results
+                    navigate('/recipes', { state: { results: data } });
+                })
+                .catch(error => {
+                    console.error('Error searching recipes:', error);
+                });
+        }
+    };
 
     return (
     <div>

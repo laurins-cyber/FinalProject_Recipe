@@ -1,11 +1,11 @@
 import React from 'react';
 import SearchBar from './SearchBar';
 
-const Home = () => {
+const Home = ({ searchRecipes }) => {
     return (
         <div>
             <h2>Welcome to Recipe Search</h2>
-            <SearchBar />
+            <SearchBar searchRecipes={searchRecipes} />
         </div>
     );
 };
