@@ -7,7 +7,7 @@ const SearchBar = () => {
 
     const handleSearch = () => {
     if (query.trim() !== '') {
-        fetch(`/api/search?query=${query}`)
+        fetch(`/api/search?ingredients=${query}`)
         .then(response => {
             if (!response.ok) {
             throw new Error('Failed to fetch recipes');
@@ -15,14 +15,14 @@ const SearchBar = () => {
             return response.json();
         })
         .then(data => {
-          // Redirect to the Recipes component with search results
-            navigate('/recipes', { state: { results: data.results } });
+            // Redirect to the Recipes component with search results
+            navigate('/recipes', { state: { results: data } });
         })
         .catch(error => {
             console.error('Error searching recipes:', error);
         });
-    }
-    };
+}
+};
 
     return (
     <div>

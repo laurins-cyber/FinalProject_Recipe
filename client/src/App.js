@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Navbar from "./compoments/Navbar";
-import Home from "./compoments/Home";
-import RecipeList from "./compoments/RecipeList";
-import Recipe from './compoments/Recipe';
-import FavPage from "./compoments/FavPage";
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import RecipeList from "./components/RecipeList";
+import Recipe from './components/Recipe';
+import FavPage from "./components/FavPage";
 
 const App = () => {
     const [recipes, setRecipes] = useState([]);
@@ -24,27 +24,40 @@ const App = () => {
         }
     };
 
-    const handleFavorite = () => {
-        setFavoriteIds([...favoriteIds, id]);
-    }
+    const handleFavorite = async (id) => {
+        const recipe = recipes.find(r => r.id === id);
+        if (!recipe) return;
+
+        try {
+            const response = await fetch('http://localhost:5000/favorites', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(recipe),
+            });
+            if (response.ok) {
+                setFavoriteIds([...favoriteIds, id]);
+            } else {
+                console.error('Failed to add to favorites');
+            }
+        } catch (error) {
+            console.error('Error adding to favorites:', error);
+        }
+    };
 
     return(
-    <>
     <Router>
         <Navbar />
-        <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/recipes" element={<Recipes />} />
-        <Route path="/recipe/:id" element={<Recipe />} />
-        <Route path="/favorites" element={<FavPage />} />
-        </Routes>
+        <div>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/recipes" element={<RecipeList recipes={recipes} onFavorite={handleFavorite} />} />
+                    <Route path="/recipe/:id" element={<Recipe />} />
+                    <Route path="/favorites" element={<FavPage />} />
+                </Routes>
+            </div>
     </Router>
-    <div>
-        <h1>Recipe Search</h1>
-        <SearchBar onSearch={searchRecipes} />
-        <RecipeList recipes={recipes} onFavorite={handleFavorite} />
-    </div>
-    </>
     )
 
 };

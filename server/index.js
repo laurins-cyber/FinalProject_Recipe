@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const fetch = require('node-fetch');
 const app = express();
+const { MongoClient } = require('mongodb');
 
 const PORT = process.env.PORT;
 const MONGODB_URI = process.env.MONGODB_URI;
@@ -23,7 +24,7 @@ MongoClient.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: tr
 app.get('/api/search', async (req, res) => {
   const ingredients = req.query.ingredients;
   if (!ingredients) return res.status(400).send('Ingredients query parameter is required.');
-    const encodedQuery = encodeURIComponent(query); // Encode the query parameter
+    const encodedQuery = encodeURIComponent(ingredients); // Encode the query parameter
 
 const url = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/findByIngredients?ingredients=${encodedQuery}&number=5&ignorePantry=true&ranking=1`;
 const options = {
@@ -51,14 +52,14 @@ try {
 });
 
 //Add to Favorite
-app.post('./favorites', async(req, res) => {
+app.post('/favorites', async(req, res) => {
   const recipe = req.body;
 
   if(!recipe || !recipe.id) {
     return res.status(400).send('Recipre data is required!');
   }
   try{
-    const favoriteCollection = db.collection('Favotites');
+    const favoriteCollection = db.collection('Favorites');
     await favoriteCollection.insertOne(recipe);
 
     res.status(201).send('Recipe added to Favorites!');
