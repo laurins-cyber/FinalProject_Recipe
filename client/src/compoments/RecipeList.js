@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Recipes = ({ location }) => {
+const Recipes = ({ recipes, onFavorite }) => {
     const { results } = location?.state || { results: [] };
 
     return (
