@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
-const Recipe = ({ match }) => {
-    const { id } = match.params;  
+const Recipe = () => {
+    const { id } = useParams(); 
     const [recipe, setRecipe] = useState(null);
     const navigate = useNavigate();
 
@@ -11,9 +10,9 @@ const Recipe = ({ match }) => {
     fetchRecipe(id);
   }, [id]);
 
-  const fetchRecipe = () => {
+  const fetchRecipe = (id) => {
 // Fetch recipe details using id
-  fetch(`api/recipe/${id}`)
+fetch(`/api/recipe/${id}`)
   .then(response => {
     if(!response.ok) {
       throw new Error("Fail to fetch recipe");

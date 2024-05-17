@@ -1,7 +1,7 @@
 
 require('dotenv').config();
 const express = require('express');
-const fetch = require('node-fetch');
+//const fetch = import("node-fetch");
 const app = express();
 const { MongoClient } = require('mongodb');
 
@@ -34,7 +34,7 @@ const options = {
     'X-RapidAPI-Host': 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com'
   }
 };
-
+console.log(fetch);
 try {
 	const response = await fetch(url, options);
 	if (!response.ok) {
