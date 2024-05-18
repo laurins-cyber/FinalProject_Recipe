@@ -52,7 +52,7 @@ try {
 });
 
 //Add to Favorite
-app.post('/favorites', async(req, res) => {
+app.post('/api/favorites', async(req, res) => {
   const recipe = req.body;
 
   if(!recipe || !recipe.id) {
@@ -67,6 +67,31 @@ app.post('/favorites', async(req, res) => {
     res.status(500).json({error: error.message});
   }
 })
+
+// Get all recipes from "Recipes" collection
+app.get('/api/recipes', async (req, res) => {
+  try {
+      const recipesCollection = db.collection('Recipes');
+      const recipes = await recipesCollection.find().toArray();
+      res.json(recipes);
+  } catch (error) {
+      console.error('Error fetching recipes:', error);
+      res.status(500).json({ error: error.message });
+  }
+});
+
+// Get all favorite recipes from "Favorites" collection
+app.get('/api/favorites', async (req, res) => {
+  try {
+      const favoritesCollection = db.collection('Favorites');
+      const favorites = await favoritesCollection.find().toArray();
+      res.json(favorites);
+  } catch (error) {
+      console.error('Error fetching favorite recipes:', error);
+      res.status(500).json({ error: error.message });
+  }
+});
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
