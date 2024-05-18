@@ -30,7 +30,7 @@ const App = () => {
         if (!recipe) return;
 
         try {
-            const response = await fetch('http://localhost:5000/favorites', {
+            const response = await fetch('/api/favorites', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<Home searchRecipes={searchRecipes} />} />
                     <Route path="/recipes" element={<Recipes recipes={recipes} onFavorite={handleFavorite} />} />
-                    <Route path="/recipe/:id" element={<Recipe />} />
+                    <Route path="/recipe/:id" element={<Recipe onFavorite={handleFavorite} recipes={recipes} />} />
                     <Route path="/favorites" element={<FavPage />} />
                 </Routes>
             </div>

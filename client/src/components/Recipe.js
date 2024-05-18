@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 
-const Recipe = () => {
+const Recipe = ({onFavorite, recipes}) => {
     const { id } = useParams(); 
     const [recipe, setRecipe] = useState(null);
     const navigate = useNavigate();
@@ -9,6 +9,12 @@ const Recipe = () => {
   useEffect(() => {
     fetchRecipe(id);
   }, [id]);
+
+  const handleFavorite = (recipe) => {
+    if (!recipes.find(r => r.id === recipe.id)) {
+        onFavorite(recipe.id);
+    }
+};
 
   const fetchRecipe = (id) => {
 // Fetch recipe details using id
@@ -58,6 +64,7 @@ fetch(`/api/recipe/${id}`)
               </li>
             ))}
           </ol>
+          <button onClick={handleFavorite}>Add to Favorite</button>
         </div>
       )}
     </div>

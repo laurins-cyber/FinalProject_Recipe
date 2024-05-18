@@ -92,6 +92,21 @@ app.get('/api/favorites', async (req, res) => {
   }
 });
 
+// Fetch a single recipe by ID
+app.get('/api/recipe/:id', async (req, res) => {
+  const { id } = req.params;
+
+  try {
+      const recipe = await db.collection('Recipes').findOne({ id: parseInt(id) });
+      if (!recipe) {
+          return res.status(404).send('Recipe not found');
+      }
+      res.json(recipe);
+  } catch (error) {
+      res.status(500).json({ error: error.message });
+  }
+});
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
