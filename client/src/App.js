@@ -13,7 +13,8 @@ const App = () => {
 
     const searchRecipes = async (ingredients) => {
         try {
-            const response = await fetch (`/api/search?ingredients=${ingredients}`);
+            console.log(ingredients);
+            const response = await fetch (`http://localhost:3001/api/search?ingredients=${ingredients}`);
             if(!response.ok) {
                 throw new Error('Network response was not ok.');
             }
