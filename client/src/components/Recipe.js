@@ -1,74 +1,77 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
-const Recipe = ({onFavorite, recipes}) => {
-    const { id } = useParams(); 
+const Recipe = ({ onFavorite, recipes }) => {
+    const { id } = useParams();
     const [recipe, setRecipe] = useState(null);
     const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchRecipe(id);
-  }, [id]);
+    
 
-  const handleFavorite = (recipe) => {
-    if (!recipes.find(r => r.id === recipe.id)) {
-        onFavorite(recipe.id);
-    }
-};
+    useEffect(() => {
+        fetchRecipe(id);
+    }, [id]);
 
-  const fetchRecipe = (id) => {
-// Fetch recipe details using id
-fetch(`/api/recipe/${id}`)
-  .then(response => {
-    if(!response.ok) {
-      throw new Error("Fail to fetch recipe");
-    }
-    return response.json();
-  })
-  .then(data =>{
-    setRecipe(data);
-  })
-  .catch(error => {
-    console.error("Error fetching recipe:", error);
-  });
-  };
+    const fetchRecipe = async (id) => {
+        try {
+          console.log(id);
+            const response = await fetch(`/api/recipe/${id}`);
+            if (!response.ok) {
+                throw new Error("Failed to fetch recipe");
+            }
+            const data = await response.json();
+            console.log(data);
+            setRecipe(data);
 
-  const handleGoBack = () => {
-    navigate(-1);
-  }
+        } catch (error) {
+            console.error("Error fetching recipe:", error);
+        }
+    };
+
+    const handleFavorite = () => {
+      if (recipe && !recipes.find(r => r.id === recipe.id)) {
+          onFavorite(recipe.id);
+      }
+    };
+
+    const handleGoBack = () => {
+        navigate(-1);
+    };
 
     return (
-    <>
-    <div>
-      <button onClick={handleGoBack}>Back</button>
-        {recipe && <h2>{recipe.title}</h2>}
-    </div>
-
-    <div>
-      {recipe && (
-        <div>
-          <img src={recipe.image} alt={recipe.title} />
-          <ul>
-            {recipe.ingredients.map((ingredient, index) => (
-              <li key={index}>
-                {ingredient}
-              </li>
-            ))}
-          </ul>
-          <p>Cooking time: {recipe.cookingTime}</p>
-          <h3>Steps</h3>
-          <ol>
-            {recipe.steps.map((step, index) => (
-              <li key={index}>
-                {step}
-              </li>
-            ))}
-          </ol>
-          <button onClick={handleFavorite}>Add to Favorite</button>
-        </div>
-      )}
-    </div>
-    </>
+        <>
+            <div>
+                <button onClick={handleGoBack}>Back</button>
+                {recipe && <h2>{recipe.title}</h2>}
+            </div>
+            <div>
+                {recipe && (
+                    <div>
+                        <img src={recipe.image} alt={recipe.title} />
+                        
+                        <ul>
+                            {recipe.extendedIngredients.map((ingredient, index) => (
+                                <li key={index}>
+                                    {ingredient.original}
+                                </li>
+                            ))}
+                        </ul>
+                        <p>Cooking time: {recipe.readyInMinutes} minutes</p>
+                        <p>{recipe.summary}</p>
+                        <h3>Steps</h3>
+                        <ol>
+                            {recipe.analyzedInstructions[0]?.steps.map((step, index) => (
+                                <li key={index}>
+                                    {step.step}
+                                </li>
+                            ))}
+                        </ol>
+                        
+                        <button onClick={handleFavorite}>Add to Favorite</button>
+                    </div>
+                )}
+            </div>
+        </>
     );
 };
 
