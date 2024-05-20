@@ -67,6 +67,7 @@ app.post('/api/favorites', async (req, res) => {
 // New endpoint to fetch detailed recipe information by ID
 app.get('/api/recipe/:id', async (req, res) => {
     const recipeId = req.params.id;
+    console.log(`Fetching recipe with ID: ${recipeId}`)
     const url = `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/${recipeId}/information`;
     const options = {
         method: 'GET',
@@ -81,7 +82,8 @@ app.get('/api/recipe/:id', async (req, res) => {
       const recipe = await response.json();
       res.json(recipe);
     } catch (error) {
-      console.error(error);
+      console.error(`Error in API call: ${error.message}`);
+      res.status(500).json({ error: error.message });
     }
 });
 

@@ -14,8 +14,9 @@ const Recipe = ({ onFavorite, recipes }) => {
 
     const fetchRecipe = async (id) => {
         try {
-          console.log(id);
-            const response = await fetch(`/api/recipe/${id}`);
+          
+            const response = await fetch(`http://localhost:3001/api/recipe/${id}`);
+            console.log(id);
             if (!response.ok) {
                 throw new Error("Failed to fetch recipe");
             }
