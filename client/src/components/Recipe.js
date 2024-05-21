@@ -30,6 +30,7 @@ const Recipe = ({ onFavorite, recipes }) => {
     };
 
     const handleFavorite = () => {
+        console.log('Favorite button clicked');//debug
       if (recipe && !recipes.find(r => r.id === recipe.id)) {
           onFavorite(recipe.id);
       }

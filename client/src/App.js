@@ -10,7 +10,7 @@ import FavPage from "./components/FavPage";
 const App = () => {
     const [recipes, setRecipes] = useState([]);
     const [favoriteIds, setFavoriteIds] = useState([]);
-
+//search recipe
     const searchRecipes = async (ingredients) => {
         try {
             console.log(ingredients);
@@ -25,18 +25,18 @@ const App = () => {
             console.error('Error searching recipes:', error);
         }
     };
-
+//Add to favorite
     const handleFavorite = async (id) => {
         const recipe = recipes.find(r => r.id === id);
         if (!recipe) return;
 
         try {
-            const response = await fetch('/api/favorites', {
+            const response = await fetch('http://localhost:3001/api/favorites/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(recipe),
+                body: JSON.stringify({id, title, image, summary}),
             });
             if (response.ok) {
                 setFavoriteIds([...favoriteIds, id]);

@@ -12,6 +12,8 @@ const apiKey = process.env.API_KEY;
 app.use(cors());
 app.use(express.json());
 
+let favoriteRecipes = [];
+
 let db;
 MongoClient.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(client => {
@@ -20,7 +22,7 @@ MongoClient.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: tr
     })
     .catch(error => console.error(error));
 
-// Get search 5 results and add into MongoDB 'Recipes' collection
+// Get search 5 results and add into MongoDB 'SearchList' collection
 app.get('/api/search', async (req, res) => {
     const ingredients = req.query.ingredients;
     if (!ingredients) return res.status(400).send('Ingredients query parameter is required.');
@@ -41,7 +43,7 @@ app.get('/api/search', async (req, res) => {
             throw new Error(`Error: ${response.statusText}`);
         }
         const recipes = await response.json();
-        const recipesCollection = db.collection('Recipes');
+        const recipesCollection = db.collection('SearchList');
         await recipesCollection.insertMany(recipes);
         res.json(recipes);
     } catch (error) {
@@ -49,20 +51,7 @@ app.get('/api/search', async (req, res) => {
     }
 });
 
-// Add to Favorite
-app.post('/api/favorites', async (req, res) => {
-    const recipe = req.body;
-    if (!recipe || !recipe.id) {
-        return res.status(400).send('Recipe data is required!');
-    }
-    try {
-        const favoriteCollection = db.collection('Favorites');
-        await favoriteCollection.insertOne(recipe);
-        res.status(201).send('Recipe added to Favorites!');
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
+
 
 // New endpoint to fetch detailed recipe information by ID
 app.get('/api/recipe/:id', async (req, res) => {
@@ -78,12 +67,33 @@ app.get('/api/recipe/:id', async (req, res) => {
     };
 
     try {
+      // Fetch recipe information from Spoonacular API
       const response = await fetch(url, options);
       const recipe = await response.json();
+
+      // Insert recipe into MongoDB "Recipes" collection
+      const recipesCollection = db.collection('Recipes');
+      await recipesCollection.insertOne(recipe);
+      
       res.json(recipe);
     } catch (error) {
       console.error(`Error in API call: ${error.message}`);
       res.status(500).json({ error: error.message });
+    }
+});
+// Add to Favorite
+app.post('/api/favorites', async (req, res) => {
+    const recipe = req.body;
+    console.log(recipe);
+    if (!recipe || !recipe.id) {
+        return res.status(400).send('Recipe data is required!');
+    }
+    try {
+        const favoriteCollection = db.collection('Favorites');
+        await favoriteCollection.insertOne(recipe);
+        res.status(201).send('Recipe added to Favorites!');
+    } catch (error) {
+        res.status(500).json({ error: error.message });
     }
 });
 
@@ -98,6 +108,8 @@ app.get('/api/favorites', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
