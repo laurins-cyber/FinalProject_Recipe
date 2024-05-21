@@ -31,14 +31,16 @@ const App = () => {
         if (!recipe) return;
 
         try {
+            console.log('Preparing to send favorite request:', recipe);
             const response = await fetch('http://localhost:3001/api/favorites/add', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({id, title, image, summary}),
+                body: JSON.stringify(recipe),
             });
             if (response.ok) {
+                console.log('Favorite request successful');
                 setFavoriteIds([...favoriteIds, id]);
             } else {
                 console.error('Failed to add to favorites');

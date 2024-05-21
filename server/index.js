@@ -74,7 +74,7 @@ app.get('/api/recipe/:id', async (req, res) => {
       // Insert recipe into MongoDB "Recipes" collection
       const recipesCollection = db.collection('Recipes');
       await recipesCollection.insertOne(recipe);
-      
+
       res.json(recipe);
     } catch (error) {
       console.error(`Error in API call: ${error.message}`);
@@ -82,7 +82,7 @@ app.get('/api/recipe/:id', async (req, res) => {
     }
 });
 // Add to Favorite
-app.post('/api/favorites', async (req, res) => {
+app.post('/api/favorites/add', async (req, res) => {
     const recipe = req.body;
     console.log(recipe);
     if (!recipe || !recipe.id) {
