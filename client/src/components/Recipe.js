@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const Recipe = ({ onFavorite, recipes }) => {
+const Recipe = ({ onFavorite, favoriteIds }) => {
     const { id } = useParams();
     const [recipe, setRecipe] = useState(null);
     const navigate = useNavigate();
@@ -14,7 +14,7 @@ const Recipe = ({ onFavorite, recipes }) => {
 
     const fetchRecipe = async (id) => {
         try {
-          
+
             const response = await fetch(`http://localhost:3001/api/recipe/${id}`);
             console.log(id);
             if (!response.ok) {
@@ -33,11 +33,13 @@ const Recipe = ({ onFavorite, recipes }) => {
         console.log('Favorite button clicked');//debug
         // Additional Debugging
         console.log('Current recipe:', recipe);
-        console.log('Current recipes array:', recipes);
-      if (recipe && !recipes.find(r => r.id === recipe.id)) {
+        //console.log('Current recipes array:', recipes);
+      if (recipe && !favoriteIds.find(r => r.id === recipe.id)) {
         console.log('Sending favorite request for recipe:', recipe);
           onFavorite(recipe.id);
-      }
+      } else {
+        console.log('Recipe already in favorites or not found:', recipe);
+    }
     };
 
     const handleGoBack = () => {

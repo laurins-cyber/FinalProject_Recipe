@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const FavPage = () => {
     const [favorites, setFavorites] = useState([]);
@@ -35,8 +36,8 @@ const FavPage = () => {
                 {favorites.map(recipe => (
                     <li key={recipe.id}>
                         <img src={recipe.image} alt={recipe.title} />
-                        <p>{recipe.title}</p>
-                    </li>
+                    <Link to={`/recipe/${recipe.id}`}>{recipe.title}</Link>
+                </li>
                 ))}
             </ul>
         </div>)}

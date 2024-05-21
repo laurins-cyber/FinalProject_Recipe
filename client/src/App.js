@@ -27,6 +27,7 @@ const App = () => {
     };
 //Add to favorite
     const handleFavorite = async (id) => {
+
         const recipe = recipes.find(r => r.id === id);
         if (!recipe) return;
 
@@ -57,7 +58,7 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<Home searchRecipes={searchRecipes} />} />
                     <Route path="/recipes" element={<Recipes recipes={recipes} onFavorite={handleFavorite} />} />
-                    <Route path="/recipe/:id" element={<Recipe onFavorite={handleFavorite} recipes={recipes} />} />
+                    <Route path="/recipe/:id" element={<Recipe onFavorite={handleFavorite} favoriteIds={favoriteIds}/>} />
                     <Route path="/favorites" element={<FavPage />} />
                 </Routes>
             </div>
