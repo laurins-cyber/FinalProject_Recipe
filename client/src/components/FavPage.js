@@ -21,6 +21,19 @@ const FavPage = () => {
         fetchFavorites();
     }, []);
 
+    const handleDelete = async (id) => {
+        try {
+            await fetch(`http://localhost:3001/api/favorites/${id}`, {
+                method: 'DELETE'
+            });
+
+            // Update the state to remove the deleted recipe
+            setFavorites(favorites.filter(recipe => recipe.id !== id));
+        } catch (error) {
+            console.error('Error deleting favorite:', error);
+        }
+    };
+
     return (
         <div>
         {isLoading ? (
@@ -37,11 +50,12 @@ const FavPage = () => {
                     <li key={recipe.id}>
                         <img src={recipe.image} alt={recipe.title} />
                     <Link to={`/recipe/${recipe.id}`}>{recipe.title}</Link>
+                    <button onClick={() => handleDelete(recipe.id)}>Delete</button>
                 </li>
                 ))}
             </ul>
         </div>)}
-        </div>)};
+        </div>)}
         </div>
         );
 };

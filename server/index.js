@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 //const fetch = require('node-fetch');
-const { MongoClient } = require('mongodb');
+const { MongoClient, ObjectId } = require('mongodb');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -108,6 +108,30 @@ app.get('/api/favorites', async (req, res) => {
         res.json(favorites);
     } catch (error) {
         console.error('Error fetching favorite recipes:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Delete a favorite recipe from "Favorites" collection
+app.delete('/api/favorites/:id', async (req, res) => {
+    const { id } = req.params;
+    console.log('Received recipe ID:', id);
+    try {
+        // Validate that the id is in a valid ObjectId format
+        if (!ObjectId.isValid(id)) {
+            return res.status(400).send('Invalid recipe ID');
+        }
+        // Delete the favorite recipe by its ID from the "Favorites" collection
+        const favoritesCollection = db.collection('Favorites');
+        const result = await favoritesCollection.deleteOne({ _id: new ObjectId(id) });
+        
+        if (result.deletedCount === 0) {
+            return res.status(404).send('Recipe not found in favorites!');
+        }
+
+        res.status(204).send('Deleted!'); 
+    } catch (error) {
+        console.error('Error deleting favorite recipe:', error);
         res.status(500).json({ error: error.message });
     }
 });
