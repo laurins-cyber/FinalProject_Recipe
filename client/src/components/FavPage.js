@@ -34,6 +34,33 @@ const FavPage = () => {
         }
     };
 
+    const handleMemoChange = (id, newMemo) => {
+        setFavorites(favorites.map(recipe => {
+            if (recipe.id === id) {
+                return { ...recipe, memo: newMemo };
+            }
+            return recipe;
+        }));
+    };
+
+    const handleSaveMemo = async (id, memo) => {
+        try {
+            const response = await fetch(`http://localhost:3001/api/favorites/${id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ memo })
+            });
+
+            if (!response.ok) {
+                console.error('Failed to save memo');
+            }
+        } catch (error) {
+            console.error('Error saving memo:', error);
+        }
+    };
+
     return (
         <div>
         {isLoading ? (
@@ -50,6 +77,12 @@ const FavPage = () => {
                     <li key={recipe.id}>
                         <img src={recipe.image} alt={recipe.title} />
                     <Link to={`/recipe/${recipe.id}`}>{recipe.title}</Link>
+                    <textarea
+                        value={recipe.memo || ''}
+                        onChange={e => handleMemoChange(recipe.id, e.target.value)}
+                        placeholder="Add your memo or notes here..."
+                    />
+                    <button onClick={() => handleSaveMemo(recipe.id, recipe.memo)}>Save Memo</button>
                     <button onClick={() => handleDelete(recipe.id)}>Delete</button>
                 </li>
                 ))}

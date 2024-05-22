@@ -112,18 +112,47 @@ app.get('/api/favorites', async (req, res) => {
     }
 });
 
+// Update a MEMO in 'Favorite'
+app.patch('/api/favorites/:id', async (req, res) => {
+    const { id } = req.params;
+    console.log('Received recipe ID:', id);
+    const { memo } = req.body;
+    console.log('Received memo:', memo);
+    try {
+        // Validate that the id is in a valid ObjectId format
+        if (!id) {
+            return res.status(400).send('Invalid recipe ID');
+        }
+        // Update the memo field for the favorite recipe by its ID in the "Favorites" collection
+        const favoritesCollection = db.collection('Favorites');
+        const result = await favoritesCollection.updateOne(
+            { id: Number.parseInt(id) },
+            { $set: { memo: memo } } // Update memo field
+        );
+        console.log('result', result);
+        if (result.modifiedCount === 0) {
+            return res.status(404).send('Recipe not found');
+        } 
+
+        res.status(200).send('Memo updated successfully');
+    } catch (error) {
+        console.error('Error deleting favorite recipe:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
+
 // Delete a favorite recipe from "Favorites" collection
 app.delete('/api/favorites/:id', async (req, res) => {
     const { id } = req.params;
     console.log('Received recipe ID:', id);
     try {
         // Validate that the id is in a valid ObjectId format
-        if (!ObjectId.isValid(id)) {
-            return res.status(400).send('Invalid recipe ID');
-        }
+        //if (!ObjectId.isValid(id)) {
+        //    return res.status(400).send('Invalid recipe ID');
+        //}
         // Delete the favorite recipe by its ID from the "Favorites" collection
         const favoritesCollection = db.collection('Favorites');
-        const result = await favoritesCollection.deleteOne({ _id: new ObjectId(id) });
+        const result = await favoritesCollection.deleteOne({ id: Number.parseInt(id) });
         
         if (result.deletedCount === 0) {
             return res.status(404).send('Recipe not found in favorites!');
