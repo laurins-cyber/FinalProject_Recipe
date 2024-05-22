@@ -83,12 +83,15 @@ app.get('/api/recipe/:id', async (req, res) => {
 });
 // Add to Favorite
 app.post('/api/favorites/add', async (req, res) => {
-    const recipe = req.body;
-    console.log(recipe);
-    if (!recipe || !recipe.id) {
-        return res.status(400).send('Recipe data is required!');
+    const { id } = req.body;
+    if (!id) {
+        return res.status(400).send('Recipe ID is required!');
     }
     try {
+        // Fetch detailed recipe information from the '/api/recipe/:id' endpoint
+        const response = await fetch(`http://localhost:3001/api/recipe/${id}`);
+        const recipe = await response.json();
+        // Insert the detailed recipe information into the "Favorites" collection
         const favoriteCollection = db.collection('Favorites');
         await favoriteCollection.insertOne(recipe);
         res.status(201).send('Recipe added to Favorites!');
