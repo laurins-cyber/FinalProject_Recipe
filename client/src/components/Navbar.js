@@ -1,42 +1,64 @@
-//imports
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Navbar = () => {
-    return(
-        <>
-        <Title>
-        <Link to="/">EMPTY YOUR FRIDGE</Link>
-        </Title>
-        <Nav>
-        <Link to="/recipes">Recpies</Link>
-        <Link to="/favorites">Fav</Link>
-        </Nav>
-        </>
-    )
+    return (
+        <NavbarContainer>
+            <Logo>
+                <Link to="/">EMPTY YOUR FRIDGE</Link>
+            </Logo>
+            <Links>
+                <StyledLink to="/recipes">Recipes</StyledLink>
+                <StyledLink to="/favorites">Fav</StyledLink>
+            </Links>
+        </NavbarContainer>
+    );
 };
 
 export default Navbar;
 
-const Title = styled.div`
-font-family: "Kranky", serif;
-font-weight: 400;
-font-size: 60px;
-font-style: normal;
-float: left;
-text-align: center;
-padding: 14px 16px;
+const NavbarContainer = styled.div`
+  width: 100%;
+  height: 100px;
+  position: fixed;
+  background: #161717;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 100;
 `;
 
-const Nav = styled.div`
-font-family: "Kranky", serif;
-font-weight: 400;
-font-size: 48px;
-font-style: normal;
-float: right;
-&:hover {
-    border:2px dashed white;
+const Logo = styled.div`
+  font-family: "Kranky", serif;
+  font-weight: 400;
+  font-style: normal;
+  a {
+    color: white;
+    text-decoration: none;
+    font-size: 40px;
+  }
+`;
+
+const Links = styled.div`
+  display: flex;
+  align-items: center;
+  font-family: "Kranky", serif;
+  font-weight: 400;
+  font-style: normal;
+`;
+
+const StyledLink = styled(Link)`
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 24px;
+  position: relative;
+  
+  &:hover {
+    border: 2px dashed white;
     border-radius: 5px;
-    }
+    padding: 5px;
+  }
 `;
