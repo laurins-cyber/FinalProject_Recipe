@@ -1,22 +1,36 @@
 import React from 'react';
 import SearchBar from './SearchBar';
+import styled from "styled-components";
 
 const Home = ({ searchRecipes }) => {
     return (
         <>
-        <div>
             <SearchBar searchRecipes={searchRecipes} />
-        </div>
-
+        <Container>
         <h2>About us</h2>
-        <p>
-        We would love to support your meals and save your time! Let us eat healthy and happy!
-        </p>
-        <p>
+        <PadText>
+        We would love to support your meals and save your time!<br /> Let us eat healthy and happy!
+        </PadText>
+        <PadText>
         Out of ideas for your prep? We got your back!
-        </p>
+        </PadText>
+        </Container>
         </>
     );
 };
 
 export default Home;
+
+const Container = styled.footer`
+padding: 100px 0px;
+text-align:center;
+font-family: "Fuzzy Bubbles", sans-serif;
+font-weight: 400;
+font-style: normal;
+color: white;
+background-color:#171717;
+`;
+
+const PadText = styled.p`
+padding-top: 40px;
+`;

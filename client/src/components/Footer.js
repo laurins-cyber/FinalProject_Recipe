@@ -1,19 +1,33 @@
-//import styled from "styled-components";
+import styled from "styled-components";
 
 const Footer = () => {
 
     return(
-        <footer>
-
+        <FooterContainer>
             <h2>Contact us</h2>
-            <p>
+            <PadText>
             Email:  foodielove_allday@gmail.com
-            </p>
-            <p>
+            </PadText>
+            <PadText>
             Insta: Foodie_love_allDay
-            </p>
-        </footer>
+            </PadText>
+        </FooterContainer>
     )
 }
 
 export default Footer;
+
+const FooterContainer = styled.footer`
+padding: 100px 0px;
+text-align:center;
+font-family: "Fuzzy Bubbles", sans-serif;
+font-weight: 400;
+font-style: normal;
+color: white;
+background-color:#171717;
+`;
+
+const PadText = styled.p`
+
+font-size:16px;
+`;

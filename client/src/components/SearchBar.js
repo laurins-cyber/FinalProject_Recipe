@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+import searchbar from '../images/searchbar.jpg';
 
 const SearchBar = ({ searchRecipes }) => {
     const [query, setQuery] = useState('');
@@ -22,13 +23,14 @@ const SearchBar = ({ searchRecipes }) => {
     return (
     <Container>
         <SearchWrapper>
+            <Tips>Search here with what you want to use:</Tips>
         <SearchInput 
         type="text" 
         value={query} 
         onChange={(e) => setQuery(e.target.value)} 
         placeholder="Enter food ingredients (up to 3)" 
         />
-        <Tips>Tips: A comma-separated list of ingredients should contain to search</Tips>
+        <Tips>Tips: A comma-separated ingredients should contain to search if more than one.</Tips>
         <SearchButton onClick={handleSearch}>GO!</SearchButton>
         </SearchWrapper>
     </Container>
@@ -41,33 +43,32 @@ display: flex;
 justify-content: center;
 align-items: center;
 height: 100vh;
-background-image: url('images/searchbar.jpg'); 
+background-image: url(${searchbar}); 
 background-size: cover;
 background-position: center;
+background-color:#171717;
 `;
 
 const SearchWrapper = styled.div`
 text-align: center;
 background: #161717; 
-padding: 20px;
-border-radius: 10px;
+padding: 30px;
+border-radius: 30px;
 `;
 
 const SearchInput = styled.input`
-width: 60%;
-font-size: 24px;
+width:350px;
+font-size: 16px;
 font-family: "Fuzzy Bubbles", sans-serif;
 font-weight: 400;
 font-style: normal;
-color: white;
+color: black;
 padding: 11px;
-border: 1px solid white;
-border-radius:30%;
+border-radius: 15px;
 `;
 
 const Tips = styled.p`
-width: 60%;
-font-size: 16px;
+font-size: 12px;
 font-family: "Fuzzy Bubbles", sans-serif;
 font-weight: 400;
 font-style: normal;
