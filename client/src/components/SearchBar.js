@@ -83,7 +83,7 @@ font-style: normal;
 color: white;
 background-color: #161717;
 border: 2px dashed white;
-border-radius: 5px;
+border-radius: 30px;
 cursor: pointer;
 &:hover {
     background-color: white;

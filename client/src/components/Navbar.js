@@ -6,11 +6,11 @@ const Navbar = () => {
     return (
         <NavbarContainer>
             <Logo>
-                <Link to="/">EMPTY YOUR FRIDGE</Link>
+                <Link to="/">EMPTY  YOUR  FRIDGE</Link>
             </Logo>
             <Links>
-                <StyledLink to="/recipes">Recipes</StyledLink>
-                <StyledLink to="/favorites">Fav</StyledLink>
+                <StyledLink to="/recipes">🥘Recipes</StyledLink>
+                <StyledLink to="/favorites">⭐Fav</StyledLink>
             </Links>
         </NavbarContainer>
     );
@@ -47,6 +47,7 @@ const Links = styled.div`
   font-family: "Kranky", serif;
   font-weight: 400;
   font-style: normal;
+  padding-right: 30px;
 `;
 
 const StyledLink = styled(Link)`
