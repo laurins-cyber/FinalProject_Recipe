@@ -7,6 +7,8 @@ const FavPage = () => {
     const [favorites, setFavorites] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
+    const [editingMemoId, setEditingMemoId] = useState(null);
+
     useEffect(() => {
         const fetchFavorites = async () => {
             try {
@@ -82,7 +84,10 @@ const FavPage = () => {
             });
 
             if (!response.ok) {
-                console.error('Failed to save memo');
+                console.error('Failed to save memo', errorText);
+            } else {
+                // Successfully saved the memo, update the state to stop editing
+                setEditingMemoId(null);
             }
         } catch (error) {
             console.error('Error saving memo:', error);
@@ -110,7 +115,6 @@ const FavPage = () => {
                                             renderMemoEditor(recipe) :
                                             renderMemoViewer(recipe)
                                         }
-                    <button onClick={() => handleSaveMemo(recipe.id, recipe.memo)}>Save Memo</button>
                     <button onClick={() => handleDelete(recipe.id)}>Delete</button>
                 </li>
                 ))}

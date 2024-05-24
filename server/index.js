@@ -146,10 +146,6 @@ app.delete('/api/favorites/:id', async (req, res) => {
     const { id } = req.params;
     console.log('Received recipe ID:', id);
     try {
-        // Validate that the id is in a valid ObjectId format
-        //if (!ObjectId.isValid(id)) {
-        //    return res.status(400).send('Invalid recipe ID');
-        //}
         // Delete the favorite recipe by its ID from the "Favorites" collection
         const favoritesCollection = db.collection('Favorites');
         const result = await favoritesCollection.deleteOne({ id: Number.parseInt(id) });
