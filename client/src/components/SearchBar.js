@@ -20,24 +20,46 @@ const SearchBar = ({ searchRecipes }) => {
     };
 
     return (
-    <div>
-        <input 
+    <Container>
+        <SearchWrapper>
+        <SearchInput 
         type="text" 
         value={query} 
         onChange={(e) => setQuery(e.target.value)} 
         placeholder="Enter food ingredients (up to 3)" 
         />
-        <p>Tips: A comma-separated list of ingredients should contain to search</p>
-        <button onClick={handleSearch}>Search</button>
-    </div>
+        <Tips>Tips: A comma-separated list of ingredients should contain to search</Tips>
+        <SearchButton onClick={handleSearch}>GO!</SearchButton>
+        </SearchWrapper>
+    </Container>
     );
 };
 
 export default SearchBar;
+const Container = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+background-image: url('images/searchbar.jpg'); 
+background-size: cover;
+background-position: center;
+`;
+
+const SearchWrapper = styled.div`
+text-align: center;
+background: #161717; 
+padding: 20px;
+border-radius: 10px;
+`;
 
 const SearchInput = styled.input`
 width: 60%;
-font-size: 32px;
+font-size: 24px;
+font-family: "Fuzzy Bubbles", sans-serif;
+font-weight: 400;
+font-style: normal;
+color: white;
 padding: 11px;
 border: 1px solid white;
 border-radius:30%;
@@ -45,5 +67,26 @@ border-radius:30%;
 
 const Tips = styled.p`
 width: 60%;
-font-size: 18px;
+font-size: 16px;
+font-family: "Fuzzy Bubbles", sans-serif;
+font-weight: 400;
+font-style: normal;
+color: white;
+`;
+
+const SearchButton = styled.button`
+padding: 10px 20px;
+font-size: 24px;
+font-family: "Fuzzy Bubbles", sans-serif;
+font-weight: 400;
+font-style: normal;
+color: white;
+background-color: #161717;
+border: 2px dashed white;
+border-radius: 5px;
+cursor: pointer;
+&:hover {
+    background-color: white;
+    color:#161717;
+}
 `;
