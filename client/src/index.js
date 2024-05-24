@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client';
 import App from './App';
+import Footer from './components/Footer';
 import React from 'react';
 
 
@@ -10,6 +11,6 @@ root.render(
 <React.StrictMode>
     
     <App />
-    
+    <Footer />
 </React.StrictMode>
 );
