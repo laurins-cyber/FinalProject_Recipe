@@ -6,7 +6,7 @@ const Navbar = () => {
     return (
         <NavbarContainer>
             <Logo>
-                <Link to="/">EMPTY  YOUR  FRIDGE</Link>
+                <Link to="/">Empty Your Fridge</Link>
             </Logo>
             <Links>
                 <StyledLink to="/recipes">🥘Recipes</StyledLink>
@@ -33,7 +33,8 @@ const NavbarContainer = styled.div`
 const Logo = styled.div`
   font-family: "Kranky", serif;
   font-weight: 400;
-  font-style: normal;
+  font-style: none;
+  transform: rotate(-6deg);
   a {
     color: white;
     text-decoration: none;
