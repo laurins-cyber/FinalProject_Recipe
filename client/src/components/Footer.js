@@ -4,7 +4,7 @@ const Footer = () => {
 
     return(
         <FooterContainer>
-            <h2>Contact us</h2>
+            <StyledTitle>Contact us</StyledTitle>
             <PadText>
             Email:  foodielove_allday@gmail.com
             </PadText>
@@ -18,16 +18,21 @@ const Footer = () => {
 export default Footer;
 
 const FooterContainer = styled.footer`
-padding: 100px 0px;
+padding: 200px 0px;
 text-align:center;
-font-family: "Fuzzy Bubbles", sans-serif;
-font-weight: 400;
-font-style: normal;
 color: white;
 background-color:#171717;
 `;
+const StyledTitle = styled.h2`
+font-size:24px;
+font-family: "Kranky", serif;
+font-weight: 600;
+font-style: normal;
+`;
 
 const PadText = styled.p`
-
 font-size:16px;
+font-family: "Fuzzy Bubbles", sans-serif;
+font-weight: 400;
+font-style: normal;
 `;

@@ -32,7 +32,7 @@ const NavbarContainer = styled.div`
 
 const Logo = styled.div`
   font-family: "Kranky", serif;
-  font-weight: 400;
+  font-weight: 800;
   font-style: none;
   transform: rotate(-6deg);
   a {

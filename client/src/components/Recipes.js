@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
-import bonappetite from '../images/bon.jpg';
+
 
 const Recipes = ({ recipes, onFavorite }) => {
     const location = useLocation();
@@ -38,6 +38,7 @@ padding-top:100px;
 `;
 const StyledText = styled.h2`
 text-align:center;
+
 color:white;
 font-family: "Kranky", serif;
 font-weight: 400;

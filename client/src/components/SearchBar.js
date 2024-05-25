@@ -30,7 +30,7 @@ const SearchBar = ({ searchRecipes }) => {
         onChange={(e) => setQuery(e.target.value)} 
         placeholder="Enter food ingredients (up to 3)" 
         />
-        <Tips>Tips: A comma-separated ingredients should contain to search if more than one.</Tips>
+        <Tips>Tips: A comma should be contained to separated multiple ingredients.</Tips>
         <SearchButton onClick={handleSearch}>GO!</SearchButton>
         </SearchWrapper>
     </Container>

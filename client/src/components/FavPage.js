@@ -97,28 +97,28 @@ const FavPage = () => {
     return (
         <Container>
         {isLoading ? (
-            <p>Loading...</p>
+            <StyledText>Loading...🍕🥑🧁</StyledText>
         ) : ( 
             <div>
             {favorites.length === 0 ? (
-            <h2>Your do not have any Favorite yet!</h2>
+            <StyledText>Your do not have any Favorite yet!</StyledText>
         ):(
             <div>
-            <h2>Favorite Recipes</h2>
-            <ul>
+            <StyledTitle>Favorite Recipes</StyledTitle>
+            <StyledList>
                 {favorites.map(recipe => (
-                    <li key={recipe.id}>
+                    <StyledItem key={recipe.id}>
                         <img src={recipe.image} alt={recipe.title} />
-                    <Link to={`/recipe/${recipe.id}`}>{recipe.title}</Link>
-                    <Link to={`/recipe/${recipe.id}`}>{recipe.title}</Link>
+                    <StyledLink to={`/recipe/${recipe.id}`}>{recipe.title}</StyledLink>
+                    <StyledLink to={`/recipe/${recipe.id}`}>{recipe.title}</StyledLink>
                                         {editingMemoId === recipe.id ? 
                                             renderMemoEditor(recipe) :
                                             renderMemoViewer(recipe)
                                         }
-                    <button onClick={() => handleDelete(recipe.id)}>Delete</button>
-                </li>
+                    <StyledButton onClick={() => handleDelete(recipe.id)}>Remove</StyledButton>
+                </StyledItem>
                 ))}
-            </ul>
+            </StyledList>
         </div>)}
         </div>)}
         <StyledImg src={fridge} alt="Fav Logo"/>
@@ -131,13 +131,53 @@ export default FavPage;
 const Container = styled.div`
 padding:150px 10%;
 background-color: #171717;
+color: white;
+`;
+
+const StyledText = styled.p`
 font-family: "Fuzzy Bubbles", sans-serif;
 font-weight: 400;
 font-style: normal;
-color: white;
+font-size: 24px;
+`;
+
+const StyledTitle = styled.h2`
+font-family: "Kranky", serif;
+font-weight: 400;
+font-style: none;
+font-size: 32px;
 `;
 
 const StyledImg = styled.img`
 width:400px;
 float:right;
+`;
+
+const StyledList = styled.ul`
+list-style-type: none;
+margin:0px;
+`;
+
+const StyledItem = styled.li`
+text-align: center;
+display: inline-block;
+width: 100%;
+margin-top: 100px;
+`;
+
+const StyledLink = styled(Link)`
+display: block;
+text-decoration: none;
+font-family: "Kranky", serif;
+font-weight: 400;
+font-style: normal;
+color: white;
+margin-top:24px;
+`;
+
+const StyledButton = styled.button`
+background-color:#171717;
+color:gold;
+border: 2px dashed gold;
+border-radius:10px;
 `;
