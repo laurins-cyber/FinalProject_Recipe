@@ -68,8 +68,8 @@ border-radius: 15px;
 `;
 
 const Tips = styled.p`
-font-size: 12px;
-font-family: "Fuzzy Bubbles", sans-serif;
+font-size: 20px;
+font-family: "Kranky", serif;
 font-weight: 400;
 font-style: normal;
 color: white;
@@ -78,7 +78,7 @@ color: white;
 const SearchButton = styled.button`
 padding: 10px 20px;
 font-size: 24px;
-font-family: "Fuzzy Bubbles", sans-serif;
+font-family: "Kranky", serif;
 font-weight: 400;
 font-style: normal;
 color: white;

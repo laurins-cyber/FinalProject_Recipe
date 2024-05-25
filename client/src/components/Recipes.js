@@ -62,11 +62,11 @@ margin-top: 100px;
 const StyledLink = styled(Link)`
 display: block;
 text-decoration: none;
-font-family: "Fuzzy Bubbles", sans-serif;
+font-family: "Kranky", serif;
 font-weight: 400;
 font-style: normal;
 color: white;
-margin-top:20px;
+margin-top:24px;
 
 &:hover {
     border: 2px dashed white;
