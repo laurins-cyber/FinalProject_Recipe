@@ -59,8 +59,9 @@ const StyledLink = styled(Link)`
   position: relative;
   
   &:hover {
+    padding:10px;
     border: 2px dashed white;
-    border-radius: 5px;
     padding: 5px;
+    border-radius:15px;
   }
 `;
