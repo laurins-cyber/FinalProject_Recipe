@@ -23,7 +23,7 @@ const SearchBar = ({ searchRecipes }) => {
     return (
     <Container>
         <SearchWrapper>
-            <Tips>Search here with what you want to use:</Tips>
+            <Tips>Search your food ↓</Tips>
         <SearchInput 
         type="text" 
         value={query} 
