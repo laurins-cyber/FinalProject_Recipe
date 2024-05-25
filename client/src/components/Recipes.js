@@ -91,4 +91,4 @@ border-radius: 60px;
 const StyledImg = styled.img`
 width: 30%;
 border-radius: 60px;
-`
+`;
