@@ -82,7 +82,7 @@ margin-top: 15px;
 padding: 10px;
 background-color:#171717;
 color:white;
-font-family: "Fuzzy Bubbles", sans-serif;
+font-family: "Kranky", serif;
 font-weight: 400;
 font-style: normal;
 border-radius: 60px;

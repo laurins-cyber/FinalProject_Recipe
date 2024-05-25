@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import styled from 'styled-components';
+import banner from '../images/banner3.jpg';
 
 const Recipe = ({ onFavorite, favoriteIds }) => {
     const { id } = useParams();
@@ -47,23 +49,23 @@ const Recipe = ({ onFavorite, favoriteIds }) => {
     };
 
     return (
-        <>
-            <div>
-                <button onClick={handleGoBack}>Back</button>
-                {recipe && <h2>{recipe.title}</h2>}
-            </div>
-            <div>
+        <Container>
+            <ButtonContainer>
+                <BackButton onClick={handleGoBack}>Back</BackButton>
+            </ButtonContainer>
+            
                 {recipe && (
-                    <div>
+                    <RecipeContainer>
+                        <h2>{recipe.title}</h2>
                         <img src={recipe.image} alt={recipe.title} />
                         
-                        <ul>
+                        <IngredientList>
                             {recipe.extendedIngredients.map((ingredient, index) => (
                                 <li key={index}>
                                     {ingredient.original}
                                 </li>
                             ))}
-                        </ul>
+                        </IngredientList>
                         <p>Cooking time: {recipe.readyInMinutes} minutes</p>
                         <p>{recipe.summary}</p>
                         <h3>Steps</h3>
@@ -75,12 +77,111 @@ const Recipe = ({ onFavorite, favoriteIds }) => {
                             ))}
                         </ol>
                         
-                        <button onClick={handleFavorite}>Add to Favorite</button>
-                    </div>
+                        <StyledButton onClick={handleFavorite}>⭐Add to Favorite</StyledButton>
+                    </RecipeContainer>
                 )}
-            </div>
-        </>
+            <StyledImg src={banner} alt="banner" />
+        </Container>
     );
 };
 
 export default Recipe;
+
+const Container = styled.div`
+padding: 150px 100px;
+background-color:#171717;
+color: white;
+`;
+
+const ButtonContainer = styled.div`
+margin-bottom: 20px;
+`;
+
+const BackButton = styled.button`
+padding: 10px 20px;
+font-size: 24px;
+font-family: "Kranky", serif;
+font-weight: 400;
+font-style: normal;
+color: white;
+background-color: #161717;
+border: 2px dashed white;
+border-radius: 30px;
+cursor: pointer;
+&:hover {
+    background-color: white;
+    color:#161717;
+}
+`;
+
+const RecipeContainer = styled.div`
+text-align: center;
+font-family: "Fuzzy Bubbles", sans-serif;
+font-weight: 400;
+font-style: normal;
+font-size: 16px;
+    h2 {
+        margin-bottom: 20px;
+        font-size: 32px;
+        font-family: "Kranky", serif;
+        font-weight: 600;
+        font-style: normal;
+    }
+
+    h3 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        font-family: "Kranky", serif;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    img {
+        max-width: 400px;
+        height: auto;
+        margin-bottom: 50px;
+        border-radius:30px;
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    p {
+        text-align: left;
+        padding: 20px;
+    }
+
+    ol {
+        text-align: left;
+    }
+`;
+
+const IngredientList = styled.ul`
+    text-align: center;
+    margin-bottom: 20px;
+
+    li {
+        width: 45%;
+        text-align: left;
+        margin-bottom: 10px;
+    }
+`;
+
+const StyledImg = styled.img`
+width:100%;
+height:auto;
+`;
+
+const StyledButton = styled.button`
+border: 2px dashed gold;
+margin-top: 15px;
+padding: 10px;
+background-color:#171717;
+color:white;
+font-family: "Kranky", serif;
+font-weight: 400;
+font-style: normal;
+border-radius: 60px;
+`;
