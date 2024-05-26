@@ -6,10 +6,10 @@ const Footer = () => {
         <FooterContainer>
             <StyledTitle>Contact us</StyledTitle>
             <PadText>
-            Email:  foodielove_allday@gmail.com
+            Email:  emptyyourfridge@gmail.com
             </PadText>
             <PadText>
-            Insta: Foodie_love_allDay
+            Insta: Empty_Your_Fridge
             </PadText>
         </FooterContainer>
     )
