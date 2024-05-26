@@ -1,18 +1,18 @@
 # FinalProject_Recipe
-Name of Project
+## Name of Project
 “Empty Your Fridge”
-Summary
+## Summary
 This website allows users to search by food ingredient(s). The food ingredient is what they want to use or just what they have left in their fridge. Users add their desired recipes from search results to ‘Favorite’ so that these can be easily accessed for meal prep.
-Features
+## Features
 Home page: 
- Search by food ingredients
+ - Search by food ingredients
 
-Recipe page
+- Recipe page:
 Display all recipes from search results
 
-“Favorite” page:
-modify the MEMO
- unfavorite recipe from the Favorite page
+- “Favorite” page:
+  - modify the MEMO
+  - unfavorite recipe from the Favorite page
 
 APIs & Packages Used
 Search recipe:https://rapidapi.com/spoonacular/api/recipe-food-nutrition
