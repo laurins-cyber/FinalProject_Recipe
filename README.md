@@ -17,7 +17,7 @@ Display all recipes from search results
 APIs & Packages Used
 Search recipe:https://rapidapi.com/spoonacular/api/recipe-food-nutrition
 
-## Initial Routes
+## Routes
 
 The following `Route`s have been created in the `React` application, however, they have not been completed.
 
@@ -32,7 +32,7 @@ Each Route's component will be found in its own folder in `/src/components`.
 
 ---
 
-## Initial Routes Endpoints
+## Routes Endpoints
 
 The following endpoints have been created in the `Express` server. They have been completed, so you will not have to edit them.
 
