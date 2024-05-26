@@ -4,8 +4,7 @@
 ## Summary
 This website allows users to search by food ingredient(s). The food ingredient is what they want to use or just what they have left in their fridge. Users add their desired recipes from search results to ‘Favorite’ so that these can be easily accessed for meal prep.
 ## Features
-Home page: 
- - Search by food ingredients
+- Home page: Search by food ingredients
 
 - Recipe page:
 Display all recipes from search results
@@ -25,7 +24,7 @@ Search recipe:https://rapidapi.com/spoonacular/api/recipe-food-nutrition
 | "/"             | `<Home/>`         | The Home page  where can Search                 |
 | "/recipe/:_id"   | `<Recipe/>` | Will display details about a given recipe and a button to add to Favorite |
 | "/recipes"        | `<Recipes/>`        | Will display search results of 5 recipes contain this ingredient         |
-| "/favorites*"            | `<FavPage/>`     | Will display all favorited recipes with MEMO "/"             |
+| "/favorites*"            | `<FavPage/>`     | Will display all favorited recipes with MEMO              |
 
 Each Route's component will be found in its own folder in `/src/components`.
 
