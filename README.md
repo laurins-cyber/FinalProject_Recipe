@@ -39,7 +39,7 @@ The following endpoints have been created in the `Express` server. They have bee
 | URL            | Method | Description                                      |
 | -------------- | ------ | ------------------------------------------------ |
 | "/api/search"      | `GET`  | Returns an array of 5 results Recipes.  |
-| "//api/recipe/:id" | `GET`  | Returns a single detailed recipe information by id. |
+| "/api/recipe/:id" | `GET`  | Returns a single detailed recipe information by id. |
 | "/api/favorites/add"      | `POST` | Add to Favorite by id.  |
 | "/api/favorites/:id"      | `PATCH` | Update a MEMO in 'Favorite' by id.  |
 | "/api/favorites/:id"      | `DELETE` | Delete a favorite recipe from 'Favorites' by id.  |
