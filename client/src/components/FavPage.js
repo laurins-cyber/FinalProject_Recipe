@@ -101,7 +101,7 @@ const FavPage = () => {
         ) : ( 
             <div>
             {favorites.length === 0 ? (
-            <StyledText>Your do not have any Favorite yet!</StyledText>
+            <StyledText>You do not have any Favorite yet!</StyledText>
         ):(
             <div>
             <StyledTitle>Favorite Recipes</StyledTitle>
